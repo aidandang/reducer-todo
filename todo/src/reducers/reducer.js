@@ -7,20 +7,20 @@ export const initialState = [
   {
     item: 'Study Redux',
     completed: false,
-    id: 3892987589
+    id: 3437934974
   },
   {
     item: 'Read primative types and Objects in JavaScript',
     completed: false,
-    id: 3892987589
+    id: 1939497394
   },
   {
     item: 'Complete the project',
     completed: false,
-    id: 3892987589
+    id: 9848272722
   }
 ]
 
-export const reducer = () => {
-  return "";
+export function reducer(state, action) {
+  return state;
 }
