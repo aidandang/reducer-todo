@@ -1,26 +1,57 @@
-export const initialState = [
-  {
-    item: 'Learn about reducers',
-    completed: false,
-    id: 3892987589
-  },
-  {
-    item: 'Study Redux',
-    completed: false,
-    id: 3437934974
-  },
-  {
-    item: 'Read primative types and Objects in JavaScript',
-    completed: false,
-    id: 1939497394
-  },
-  {
-    item: 'Complete the project',
-    completed: false,
-    id: 9848272722
-  }
-]
+import uuid from 'react-uuid';
 
-export function reducer(state, action) {
-  return state;
+export const initialState = {
+  visibilitiesFilter: 'SHOW_ALL',
+  todos: [
+    {
+      item: 'Read primative types and Objects in JavaScript',
+      completed: false,
+      id: '1'
+    },
+    {
+      item: 'Learn about reducers',
+      completed: false,
+      id: '2'
+    },
+    {
+      item: 'Complete the project',
+      completed: false,
+      id: '4'
+    }
+  ],
+  query: ''
 }
+
+export const reducer = (state, action) => {
+  switch (action.type) {
+    case 'ADD_TODO':
+      return {
+        ...state,
+        todos: [
+          ...state.todos, 
+          { id: uuid(), item: action.item, completed: false }
+        ]
+      };
+    case 'DELETE_TODO':
+      return {
+        ...state,
+        todos: state.todos.filter(todo => todo.id !== action.id),
+      };
+    case 'TOGGLE_TODO':
+      return {
+        ...state,
+        todos: state.todos.map(todo =>
+          todo.id === action.id
+            ? { ...todo, completed: !todo.completed }
+            : todo
+        ),
+      };
+    case 'SET_QUERY':
+      return {
+        ...state,
+        query: action.query,
+      };
+    default:
+      return state;
+  }
+};
