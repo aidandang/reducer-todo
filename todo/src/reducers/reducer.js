@@ -1,7 +1,6 @@
 import uuid from 'react-uuid';
 
 export const initialState = {
-  visibilitiesFilter: 'SHOW_ALL',
   todos: [
     {
       item: 'Read primative types and Objects in JavaScript',
@@ -24,6 +23,11 @@ export const initialState = {
 
 export const reducer = (state, action) => {
   switch (action.type) {
+    case 'CLEAR_COMPLETED':
+      return {
+        ...state,
+        todos: state.todos.filter(todo => todo.completed === false)
+      }
     case 'ADD_TODO':
       return {
         ...state,

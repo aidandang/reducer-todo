@@ -19,6 +19,11 @@ const TodoList = () => {
     dispatch({ type: 'TOGGLE_TODO', id: event.target.id});
   }
 
+  const setFilter = e => {
+    e.preventDefault();
+    dispatch({ type: 'CLEAR_COMPLETED' });
+  }
+
   return (
     <div className="container">
       <div className="row mt-5">
@@ -57,7 +62,9 @@ const TodoList = () => {
                 >
                   Add Todo
                 </button>
-                <button className="disabled btn btn-primary">
+                <button
+                  onClick={setFilter}
+                  className={state.todos.filter(todo => todo.completed === true).length > 0 ? "btn btn-primary": "btn btn-primary disabled"}>
                   Clear Completed
                 </button>
               </form>
